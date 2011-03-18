@@ -1,0 +1,24 @@
+=== What
+
+Application to help people create alternative redistricting maps, calculate differences, and share with others.
+
+=== Why
+
+Gwinnett County Public Schools are redistricting my neighborhood. The board of education has stated that they are open to alternative plans but people have to some how come up with other maps and create support for one or two coherent maps to present.
+
+We also need an objective way to measure different plans. 
+
+=== Plans
+
+Each plan should result in the following:
+- a map suggestion
+- total number of effected students
+- roll up information for each ES, MS, HS with the following info:
+-- capacity
+-- attendance
+-- average distance from student homes
+-- % of single family homes
+
+=== How 
+
+Plan creators can choose which neighborhoods go with which elementary school. For now, the relationships between ES -> MS can not be changed.
