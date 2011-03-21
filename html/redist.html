@@ -10,13 +10,15 @@
 
   var poly;
   var map;
+  var hoods;
+  var schools;
   var polies = [] 
   var display = true;
 
   function initialize() {
-    var duluth = new google.maps.LatLng(33.987044, -84.134333);
+    var duluth = new google.maps.LatLng(34.0036956139944, -84.14257274609372);
     var myOptions = {
-      zoom: 14,
+      zoom: 12,
       center: duluth,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -28,74 +30,181 @@
        name: 'Harris ES',
        color: "#00FF00",
        position: new google.maps.LatLng(33.987044, -84.134333),
+       parent: 5,
       },
       1: { 
        name: 'Mason ES',
        color: "#FF0000",
        position: new google.maps.LatLng(33.998857, -84.11959),
+       parent: 7,
       },
       2: { 
        name: 'Chesney ES',
        color: "#66CCFF",
        position: new google.maps.LatLng(33.9604821, -84.1472781),
+       parent: 5,
       },
       3: { 
        name: 'Berkeley Lake ES',
        color: "#3366CC",
        position: new google.maps.LatLng(33.977799, -84.186838),
+       parent: 5,
       },
       4: { 
        name: 'Chattahoochie ES',
-       color: "#FFFFCC",
+       color: "#FFFF8F",
        position: new google.maps.LatLng(34.017761, -84.147691),
+       parent: 5,
       },
       5: { 
        name: 'Duluth MS',
        color: "#FFFFCC",
        position: new google.maps.LatLng(33.9838012, -84.1580857),
+       parent: 6,
       },
       6: { 
        name: 'Duluth HS',
        color: "#FFFFCC",
        position: new google.maps.LatLng(34.009182, -84.144709),
+       parent: null,
       },
       7: { 
        name: 'Hull MS',
        color: "#FFFFCC",
        position: new google.maps.LatLng(34.014501, -84.103997),
+       parent: 8,
       },
       8: { 
        name: 'Ptree Ridge HS',
        color: "#FFFFCC",
        position: new google.maps.LatLng(34.0121277, -84.0916348),
+       parent: null,
+      },
+      9: { 
+       name: 'Burnette ES',
+       color: "#00FF00",
+       position: new google.maps.LatLng(34.031062, -84.064444),
+       parent: 7,
+      },
+      10: { 
+       name: 'Jackson ES',
+       color: "#FFFF8F",
+       position: new google.maps.LatLng(33.9878514, -84.0591835),
+       parent: 7,
+      },
+      11: { 
+       name: 'Parsons ES',
+       color: "#3366CC",
+       position: new google.maps.LatLng(34.0135009, -84.0930967),
+       parent: 7,
       },
     }
 
     hoods = {
             0: {name: 'Bromolow',
                 path: 'w{gnEpts`O{C_AgAmC_Aw@cAqEcHwG{BcAuCCcEbCeLtH_ArDvB~I_OdKqBdEcAnFqFz_@lCh@BgJnb@wX_DoJ`GgDnBfAh@YxC`L~DbPvAB|X{QqDkD{AwDcBuJ?]',
-                schoolId: 0},
+                schoolId: 0,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
             1: {name: 'Harris Other',
                 path: 'ybinEf_s`OtAuHcJiR{GeIaOcf@w@qFbBgJkHyYxPoMtAgCeZgdAg]ya@eMha@qJvQkDbW_C|ScVxQuYhRcZvQyLbOqNjSxXbWpVjSnKvIhTxC`[bHhh@bcA`OvIrEoM|GePhL{ZfM_FmCmMtIyJ',
-                schoolId: 0},
+                schoolId: 0,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
             2: {name: 'Mall',
                 path: 'ktinEbuq`O_Oej@lAsKuGwXpRoQuYifAg]ka@pBwQtEoBtSgCbVgF`_@_U`DjHbHvMrP`l@lWps@nSri@as@nc@aYp`@uWfY',
-                schoolId: 1},
+                schoolId: 1,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
             3: {name: 'Mall Triangle',
                 path: '{lknE`tj`OlAwk@pBcm@xDqYvNpCrXnQbNhRpHzOdC~T{]dToq@jM',
-                schoolId: 1},
+                schoolId: 1,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
             4: {name: 'Kroger',
                 path: 'qkfnE~vn`O_t@jb@yp@pz@pVlc@rRhClCzKhHjDbJbWrZ~[`k@qs@f]_Uq_AadC',
-                schoolId: 2},
+                schoolId: 2,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
             5: {name: 'Inverloch',
                 path: 'olgnEzmt`Ou]nToKq]{CyBmChClCvIac@jZ\fJcFmAgEpGyFjG|Wf`@pD{CtCdAtCnFla@eTrVwMsJe[NaDdIsDfKeEpDmAb@?yJcH',
-                schoolId: 2},
+                schoolId: 2,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
             6: {name: 'Simpson Cir',
                 path: 'oyinEbiw`ObJ_Fvy@{a@gIu_@nWiJvPhRnK|Z}Sdu@~BfJev@tf@ui@abA',
-                schoolId: 3},
+                schoolId: 3,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
             7: {name: 'Berkeley',
                 path: 'kzinEriw`Okl@iw@qF{K}_@tWjDxJkLrHqJkDMqNyLfBeMr@gQkDuM?gMvBu]jLwLnc@mG~Th`@bAno@d_@bNt^vHpVxHz~@gMlEiH}LkHwI_O~EfIdQj`@tWt]|StQNl[uIxt@{Rw@}LdAiRiDkLMcH~NuHtMyJpFuApNoF|CqNdAcHa_A{|A',
-                schoolId: 3},
+                schoolId: 3,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
+            8: {name: 'Chattahoochie',
+                path: 'wdqnErfx`O~Rmx@pf@uPfU?vPzDr^mELbOvHjDtI_FmC{Kj`@eXc`@{p@yH}Dqf@}EcPcHcTsRqXyY}KsSgUmb@_ImMmaAs|AkJfFaBbA}Iz@{CxJuOQw@a@u]tL?rZbJph@dAnQfEnXMbb@qBb^iBlIqHhNMvBnHpNnIlTpDvc@hLjKtSvQte@xN~RjHpb@xF',
+                schoolId: 4,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
+            9: {name: 'Mason Main',
+                path: 'eapnE~gq`O}g@ucAmcAg{Apf@}i@bJ}SvHu_@bJcO|c@oUrYgQxLgJpRQfQ}LfIuP~BwIfaA~c@gEd_@aBzh@uAvv@gIrV{GjSuExJwD~IuAdPqBdTiB~BgUpRqRfM}WpNeAXyHvJ{X`]',
+                schoolId: 1,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
+            10: {name: 'Parson Main',
+                path: 'kgmnEjve`O{_@cOwaAyo@wPiKuQoMmGhRuErGgQrAuMrGmAbAcFqC{KnFuCgCmQdIcF|AmKh@iHxBmE~FkBdI[bHmAdEwBjHqDxCZdLZ~BMnFbBtAy@lEi@fFq@~BMhGyDlH`CVlAtDk@bHnUvMrIpGbF|EbJ~[vDnMxDfNhHzNxD`KvTeT|M}OrGeIbHmPjDgN`DcStGiJ|QcLrSiKjRuLhTwM`G{@vHX~BeAjJkHhPg\Cg@',
+                schoolId: 11,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
+            11: {name: 'Burnette Main',
+                path: 'ydunE|a_`O}WlTtI~[g]bm@jThCui@|j@yPzYsQre@_GvXqRrW{G`]lSpUlCvJZ~LlK|TpNdW~J~MbNvBlG`GpRbm@p^oM~Pj@~DiJlIkAxJuHqLwXyVyz@{GyG{]}Sd@sI{@oCiCc@MY~DkHDmGxCeP}AkAFaG[kBQmMlCoBzEuNJmGnBwIfCkDlHyEjNmAhL_EhK_FtCzBbLcFbFpCdJkFnDiBzPmApE{FtGaRga@uYuTiP{[cb@u^{h@MG',
+                schoolId: 9,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
+            12: {name: 'Jackson Main',
+                path: '_iinErch`O~VcOzOsjDfMy`CtAio@cNgo@oc@}uAiD`NhDjSuIxh@{_@nTkL?kTbP{WhRyXhC_Wwg@ag@nU_OhReMxJ}_@lEgMnFmk@bOcf@b|@z_@nc@|w@jq@n{@pd@bv@nc@|WhRjt@jStq@b^zLvXMA',
+                schoolId: 10,
+                students: {
+                       es: 128, 
+                       ms: 100,
+                       hs: 100},
+               },
     }
 
     for (var key in hoods) {
@@ -112,9 +221,10 @@
         });
         poly.setMap(map);
         clos = function() {
-          var n = hood.name
+          var h = hood
+          var p = poly
           return function(event) {
-            yowser(event, n);
+            handleHood(event, h, p);
         }}
         google.maps.event.addListener(poly, 'click', clos());
         polies.push(poly)
@@ -138,25 +248,21 @@
     });
     poly.setMap(map);
 
-    google.maps.event.addListener(map, 'click', addLatLng);
+    google.maps.event.addListener(map, 'click', addLatLngDraw);
+    
+    infowindow = new google.maps.InfoWindow();
+
 }
 
-function showArrays(event) {
+function showInfoHood(event, hood, poly) {
 
-  // Since this Polygon only has one path, we can call getPath()
-  // to return the MVCArray of LatLngs
-  var vertices = this.getPath();
+  var contentString = "<b>" + hood.name + "</b><br />";
+  //contentString += "Clicked Location: <br />" + event.latLng.lat() + "," + event.latLng.lng() + "<br />";
+  contentString += "School: " + schools[hood.schoolId].name + "<br />";
+  contentString += "ES: " + hood.students.es + "<br />";
+  contentString += "MS: " + hood.students.ms + "<br />";
+  contentString += "HS: " + hood.students.hs + "<br />";
 
-  var contentString = "<b>Bermuda Triangle Polygon</b><br />";
-  contentString += "Clicked Location: <br />" + event.latLng.lat() + "," + event.latLng.lng() + "<br />";
-
-  // Iterate over the vertices.
-  for (var i =0; i < vertices.length; i++) {
-    var xy = vertices.getAt(i);
-    contentString += "<br />" + "Coordinate: " + i + "<br />" + xy.lat() +"," + xy.lng();
-  }
-
-  // Replace our Info Window's content and position
   infowindow.setContent(contentString);
   infowindow.setPosition(event.latLng);
 
@@ -164,28 +270,60 @@ function showArrays(event) {
 
   }
 
-  /**
-   * Handles click events on a map, and adds a new point to the Polyline.
-   * Updates the encoding text area with the path's encoded values.
-   */
-  function addLatLng(event) {
+  function loadPoly() {
+    str = document.getElementById('load').value;
+    str = str.replace("(", "", "g");
+    str = str.replace(" ", "", "g");
+    str = str.replace("),", "#", "g");
+    str = str.replace("#$", "");
+    coords = str.split("#")
+    poly = new google.maps.Polyline({
+        strokeColor: "#888888",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#888888",
+        fillOpacity: 0.35
+    });
+    poly.setMap(map);
+
+    for (var i = 0; i < coords.length; i++) {
+      c = coords[i];
+      cs = c.split(",")
+      addLatLng(new google.maps.LatLng(cs[0], cs[1]));
+    }
+  }
+  function addLatLngDraw(event) {
+    addLatLng(event.latLng);
+  }
+
+  function addLatLng(latLng) {
 
     var path = poly.getPath();
 
     // Because path is an MVCArray, we can simply append a new coordinate
     // and it will automatically appear
-    path.push(event.latLng);
+    path.push(latLng);
 
     // Update the text field to display the polyline encodings
     var encodeString = google.maps.geometry.encoding.encodePath(path);
     if (encodeString != null) {
       document.getElementById('encodedPolyline').value = encodeString;
-      document.getElementById('decodedPolyline').value += event.latLng.toString();
+      document.getElementById('decodedPolyline').value += latLng.toString();
 
     }
   }
-  function yowser(event, name) {
-    alert("you clicked: " + name); 
+  function handleHood(event, hood, poly) {
+    showInfoHood(event, hood, poly);
+    school = schools[hood.schoolId];
+    document.getElementById('info').value = "";
+    document.getElementById('info').value += "Name: " + hood.name + "\n";
+    document.getElementById('info').value += "School: " + school.name + "\n";
+    
+    document.getElementById('points').value = "";
+    poly.getPath().forEach(function(elem, index) {
+      document.getElementById('points').value += elem + ", ";
+    });
+    
   }
   function toggleOverlays() {
     for (var i = 0; i <polies.length; i++) {
@@ -201,15 +339,26 @@ function showArrays(event) {
 </script>
 </head>
 <body onload="initialize()">
-  <div id="map_canvas" style="float:left;width:60%; height:80%"></div>
-  <div id="data" style="height:80%">
+  <div id="map_canvas" style="width:60%; height:80%"></div>
+  <div style="text-align:center">
   Info: 	
+  <textarea id="info" rows="6" cols="200"></textarea>
+  </div>
+  <div style="text-align:center; visibility: hidden; display: none">
+  </div>
+  <div style="text-align:center">
+  Points: 	
+  <textarea id="points" rows="3" cols="200"></textarea>
   </div>
   <div style="text-align:center">
   <input type="button" value="Toggle Overlays" onClick="toggleOverlays()"/>
+  <input type="button" value="Load" onClick="loadPoly()"/>
   </div>
   <div style="text-align:center">
-
+  Load:
+  <textarea id="load" rows="3" cols="200"></textarea>
+  </div>
+  <div style="text-align:center">
   Encoding:
   <textarea id="encodedPolyline" rows="3" cols="200"></textarea>
   </div>
