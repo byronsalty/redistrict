@@ -18,7 +18,7 @@
   function initialize() {
     var duluth = new google.maps.LatLng(34.0036956139944, -84.14257274609372);
     var myOptions = {
-      zoom: 12,
+      zoom: 13,
       center: duluth,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -224,7 +224,7 @@
           var h = hood
           var p = poly
           return function(event) {
-            handleHood(event, h, p);
+            handleHoodClick(event, h, p);
         }}
         google.maps.event.addListener(poly, 'click', clos());
         polies.push(poly)
@@ -232,29 +232,26 @@
    
     for (var key in schools) {
         school = schools[key]
-        m = new google.maps.Marker({
+        marker = new google.maps.Marker({
              position: school.position,
              title: school.name
         });
-        m.setMap(map);
+        marker.setMap(map);
+        clos = function() {
+          var s = school
+          var m = marker
+          return function(event) {
+            handleSchoolClick(event, s, m);
+        }}
+        google.maps.event.addListener(marker, 'click', clos());
+
     }
 
-    poly = new google.maps.Polyline({
-        strokeColor: "#888888",
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: "#888888",
-        fillOpacity: 0.35
-    });
-    poly.setMap(map);
-
-    google.maps.event.addListener(map, 'click', addLatLngDraw);
-    
     infowindow = new google.maps.InfoWindow();
 
 }
 
-function showInfoHood(event, hood, poly) {
+  function showInfoHood(event, hood, poly) {
 
   var contentString = "<b>" + hood.name + "</b><br />";
   //contentString += "Clicked Location: <br />" + event.latLng.lat() + "," + event.latLng.lng() + "<br />";
@@ -263,67 +260,28 @@ function showInfoHood(event, hood, poly) {
   contentString += "MS: " + hood.students.ms + "<br />";
   contentString += "HS: " + hood.students.hs + "<br />";
 
-  infowindow.setContent(contentString);
-  infowindow.setPosition(event.latLng);
-
-  infowindow.open(map);
-
+  showInfo(event.latLng, contentString);
   }
 
-  function loadPoly() {
-    str = document.getElementById('load').value;
-    str = str.replace("(", "", "g");
-    str = str.replace(" ", "", "g");
-    str = str.replace("),", "#", "g");
-    str = str.replace("#$", "");
-    coords = str.split("#")
-    poly = new google.maps.Polyline({
-        strokeColor: "#888888",
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: "#888888",
-        fillOpacity: 0.35
-    });
-    poly.setMap(map);
+  function showInfoSchool(event, school, marker) {
 
-    for (var i = 0; i < coords.length; i++) {
-      c = coords[i];
-      cs = c.split(",")
-      addLatLng(new google.maps.LatLng(cs[0], cs[1]));
-    }
-  }
-  function addLatLngDraw(event) {
-    addLatLng(event.latLng);
+    var contentString = "<b>" + school.name + "</b><br />";
+
+    showInfo(marker.position, contentString);
   }
 
-  function addLatLng(latLng) {
+  function showInfo(latLng, str) {
+    infowindow.setContent(str);
+    infowindow.setPosition(latLng);
 
-    var path = poly.getPath();
+    infowindow.open(map);
+  } 
 
-    // Because path is an MVCArray, we can simply append a new coordinate
-    // and it will automatically appear
-    path.push(latLng);
-
-    // Update the text field to display the polyline encodings
-    var encodeString = google.maps.geometry.encoding.encodePath(path);
-    if (encodeString != null) {
-      document.getElementById('encodedPolyline').value = encodeString;
-      document.getElementById('decodedPolyline').value += latLng.toString();
-
-    }
-  }
-  function handleHood(event, hood, poly) {
+  function handleHoodClick(event, hood, poly) {
     showInfoHood(event, hood, poly);
-    school = schools[hood.schoolId];
-    document.getElementById('info').value = "";
-    document.getElementById('info').value += "Name: " + hood.name + "\n";
-    document.getElementById('info').value += "School: " + school.name + "\n";
-    
-    document.getElementById('points').value = "";
-    poly.getPath().forEach(function(elem, index) {
-      document.getElementById('points').value += elem + ", ";
-    });
-    
+  }
+  function handleSchoolClick(event, school, marker) {
+    showInfoSchool(event, school, marker);
   }
   function toggleOverlays() {
     for (var i = 0; i <polies.length; i++) {
@@ -339,33 +297,9 @@ function showInfoHood(event, hood, poly) {
 </script>
 </head>
 <body onload="initialize()">
-  <div id="map_canvas" style="width:60%; height:80%"></div>
-  <div style="text-align:center">
-  Info: 	
-  <textarea id="info" rows="6" cols="200"></textarea>
-  </div>
-  <div style="text-align:center; visibility: hidden; display: none">
-  </div>
-  <div style="text-align:center">
-  Points: 	
-  <textarea id="points" rows="3" cols="200"></textarea>
-  </div>
+  <div id="map_canvas" style="width:100%; height:90%"></div>
   <div style="text-align:center">
   <input type="button" value="Toggle Overlays" onClick="toggleOverlays()"/>
-  <input type="button" value="Load" onClick="loadPoly()"/>
-  </div>
-  <div style="text-align:center">
-  Load:
-  <textarea id="load" rows="3" cols="200"></textarea>
-  </div>
-  <div style="text-align:center">
-  Encoding:
-  <textarea id="encodedPolyline" rows="3" cols="200"></textarea>
-  </div>
-
-  <div style="text-align:center">
-  Decoding:
-  <textarea id="decodedPolyline" rows="3" cols="200"></textarea>
   </div>
 </body>
 
