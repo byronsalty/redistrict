@@ -4,7 +4,7 @@ runtime: python
 api_version: 1
 
 handlers:
-- url: /
-  static_files: html/redist.html
+- url: /(.*)
+  static_files: html/\1.html
   upload: html/(.*)
 
