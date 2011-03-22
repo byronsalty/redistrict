@@ -9,6 +9,14 @@ handlers:
   upload: html/(.*)
 
 - url: /current
+  static_files: html/current.html
+  upload: html/(.*)
+
+- url: /proposal
+  static_files: html/proposal.html
+  upload: html/(.*)
+
+- url: /all
   script: views.py
 
 - url: /s/(.*)
