@@ -8,6 +8,9 @@ handlers:
   static_files: html/index.html
   upload: html/(.*)
 
-- url: /(.*)
+- url: /current
+  script: views.py
+
+- url: /s/(.*)
   static_files: html/\1.html
   upload: html/(.*)
