@@ -252,6 +252,13 @@
 
                                                   
     configureHoods();
+    draw();
+}
+function draw() {
+    displays.hood.polies = []
+    displays.hood.shown = true
+    displays.city.polies = []
+    displays.city.shown = true
 
     for (var key in hoods) {
         hood = hoods[key] 
@@ -317,8 +324,8 @@
 
     }
 
-    infowindow = new google.maps.InfoWindow();
 
+    infowindow = new google.maps.InfoWindow();
 }
 
   function showInfoHood(event, hood, poly) {
@@ -361,7 +368,7 @@
   function toggle(display) {
     display.shown = !display.shown
   }
-  function draw(display) {
+  function drawPolies(display) {
     arr = display.polies 
     for (var i = 0; i < arr.length; i++) {
       p = arr[i];
@@ -374,9 +381,9 @@
   }
   function toggleHoods() {
     toggle(displays.hood);
-    draw(displays.hood)
+    drawPolies(displays.hood)
   }
   function toggleCities() {
     toggle(displays.city);
-    draw(displays.city)
+    drawPolies(displays.city)
   }
