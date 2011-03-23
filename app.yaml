@@ -20,9 +20,13 @@ handlers:
   static_files: html/proposal.html
   upload: html/(.*)
 
-- url: /all
+- url: /data.js
   script: views.py
 
 - url: /s/(.*)
+  static_files: static/\1
+  upload: html/(.*)
+
+- url: /h/(.*)
   static_files: html/\1.html
   upload: html/(.*)
