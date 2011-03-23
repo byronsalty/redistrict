@@ -17,14 +17,11 @@ function configureHoods() {
 <body onload="initialize()">
   <div id="map_canvas" style="width:100%; height:90%"></div>
   <div style="text-align:center">
-  <input type="button" value="Toggle Overlays" onClick="toggleOverlays()"/>
+  Show Neighborhoods:
+  <input type="checkbox" name="hc" checked onChange="toggleHoods()" />
+  Show Duluth:
+  <input type="checkbox" name="cc" checked onChange="toggleCities()" />
   </div>
-  <div style="text-align:center">
-
-  Encoding:
-  <textarea id="encodedPolyline" rows="3" cols="200"></textarea>
-  </div>
-
 </body>
 
 </html>
