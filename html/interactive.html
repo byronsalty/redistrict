@@ -6,12 +6,27 @@
 <title>Current 2010-2011 Map</title>
 <link href="http://code.google.com/apis/maps/documentation/javascript/examples/standard.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
-<script type="text/javascript" src="/s/data.js"></script>
+<script type="text/javascript" src="/s/data-clean.js"></script>
 <script type="text/javascript">
 function configureHoods() {
 }
-function moveHood(hoodId) {
-alert("hood: " + hoods[0].name);
+function moveHood(sel) {
+  hood = hoods[sel.name]
+  alert("hood: " + hood.name + ", id: " + sel.value);
+  hood.schoolId = sel.value 
+
+  alert("school: " + schools.length + ", hoods: " + hoods.length);
+  for (var i = 0; i < schools.length; i++) {
+    element = document.getElementById("school" + i); 
+    element.value = ""
+  }
+
+  for (var i = 0; i < hoods.length; i++) {
+    alert("Putting " + hoods[i].name + " into school" + i);
+    element = document.getElementById("school" + i); 
+    element.value += hoods[i].name + "\n"
+     
+  }
 }
 </script>
 
@@ -26,10 +41,19 @@ alert("hood: " + hoods[0].name);
   <input type="checkbox" name="cc" checked onChange="toggleCities()" />
   </div>
   Bromolow:
-  <select name="hood.0" onChange="moveHood(0)">
+  <select name="0" onChange="moveHood(this)">
      <option value="0">Harris</option>
      <option value="2">Chesney</option>
   </select>
+
+  <table>
+  <tr>
+  Harris
+  </tr>
+  <td>
+  <textarea id="school0"></textarea>
+  </td>
+  </table> 
 </body>
 
 </html>
